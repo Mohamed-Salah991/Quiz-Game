@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY Game</title>
+    <link rel="stylesheet" href="./css/last.css">
+    <link rel="stylesheet" href="./css/queries.css">
+</head>
+
+<body>
+
+    <!-- Start Intro Section  -->
+    <div class="intro-section hidden">
+        <div class="profile-info">
+            <div class="image">
+                <img src="./images/mo1.png" alt="">
+            </div>
+            <div class="text">
+                <h1>Mohamed Salah</h1><br>
+                <span>MERN Stack Web Development</span>
+            </div>
+        </div>
+    </div>
+    <div class="start ">
+        <button>Start</button>
+    </div>
+    <!-- End Intro Section  -->
+    <!-- Start Game Rules  -->
+    <div class="game-rules hidden">
+        <div class="text">
+            <h2>Rules</h2>
+            <ol>
+                <li><p>Once you select your answer, you can't reselect.</p></li>
+                <li><p>You Can't exit form the Quiz while you are playing.</p></li>
+                <li><p>You will get points on the basis of your correct answers.</p></li>
+                <li><p>You have three ways to help</p>
+                    <ol>
+                        <li><p>Delete two incorrect choices</p></li>
+                        <li><p>Skip this question</p></li>
+                        <li><p>Show the correct answer and do not get the point</p></li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+        <div class="two-buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
+        </div>
+    </div>
+    <!-- End Game Rules  -->
+    <!-- Start Game  -->
+    <div class="game-box hidden">
+        <header class="options-help">
+            <div class="content">
+                <div class="one" >
+                    <img src="./images/delete.png" alt="">
+                </div>
+                <div class="two" >
+                    <img src="images/transfer.png" alt="">
+                </div>
+                <div class="three">
+                    <img src="./images/verify.png" alt="">
+                </div>
+            </div>
+        </header>
+        <!-- End Help Option  -->
+        <nav class="progress">
+            <ul>
+                <li><span> 1000$</span></li>
+                <li><span> 900$</span></li>
+                <li><span> 800$</span></li>
+                <li><span> 700$</span></li>
+                <li><span> 600$</span></li>
+                <li><span> 500$</span></li>
+                <li><span> 400$</span></li>
+                <li><span> 300$</span></li>
+                <li><span> 200$</span></li>
+                <li><span> 100$</span></li>
+            </ul>
+        </nav>
+        <nav class="score">
+            <div class="text">
+                <span class="current-question">0</span> of <span>10</span> Questions
+            </div>
+        </nav>
+        <!-- End Progress Section  -->
+        <section class="question-box">
+            <div class="question">
+                <p>
+                    Which of the following is used to read an HTML page and render it ?
+                </p>
+            </div>
+        </section>
+        <!-- End Question Section  --> 
+        <section class="answer-section">
+            <div class="answer-list">
+                <div><p>HTML describes the structure of a webpage</p></div>
+                <div><p>HTML is the standard markup language mainly used to create web pages</p></div>
+                <div><p>HTML consists of a set of elements that helps the browser how to view the content</p></div>
+                <div><p>All of the mentioned</p></div>
+            </div>
+        </section>
+        <div class="next-btn-section">
+            <button>Next</button>
+        </div>
+    </div>
+    <!-- End Game  -->
+    <!-- Start Result  -->
+    <div class="result-box">
+        
+    </div>
+    <!-- End Result  -->
+
+
+    <script src="./js/questions.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
