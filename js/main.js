@@ -27,6 +27,9 @@ let exitBtn = document.querySelector(".result-box .exit");
 // sounds
 let audioNotCorrect = new Audio("./sounds/100-k-1-wrong-answer.mp3");
 let audioCorrect = new Audio("./sounds/Correct-answer.mp3");
+let startAudio = new Audio("./sounds/Sound-Start .mp3");
+let optionHelpSound = new Audio("./sounds/Sound-Help.mp3");
+let skipSound = new Audio("./sounds/Skipping.mp3");
 
 let questionNumber = 0;
 let nextvActive = 9;
@@ -35,14 +38,14 @@ let currentQue = 1;
 let score = 0;
 
 function startGame() {
-  startBox.classList.add("hidden");
-  gameBox.classList.remove("hidden");
-  rulesBox.classList.add("hidden");
+  startBox.classList.remove("active");
+  gameBox.classList.add("active");
+  rulesBox.classList.remove("active");
   currentQuestion();
 }
 
 function clearAllGame() {
-  resultBox.classList.add("hidden");
+  resultBox.classList.remove("active");
   questionNumber = 0;
   nextvActive = 9;
   prevActive = 9;
@@ -136,30 +139,33 @@ function prepareResult() {
 /// Help Options
 console.log(one);
 one.addEventListener("click", function () {
-  let checkNextBtn = next_btn.style.display;
   let allOptions = document.querySelectorAll(".answer-list div");
-  // console.log(checkNextBtn);
+  optionHelpSound.play();
   one.classList.add("disabled");
   one.style.pointerEvents = "none";
-  let arr = [3, 1, 2, 0];
-  let n = 0;
-  for (let i = 0; i < 4; i++) {
-    if (allOptions[arr[i]].textContent === questions[questionNumber].answer)
-      continue;
-    else {
-      allOptions[arr[i]].textContent = "";
-      allOptions[arr[i]].style.pointerEvents = "none";
 
-      n++;
-    }
-    if (n === 2) break;
-  }
-});
+  setTimeout(function () {
+    let arr = [3, 1, 2, 0];
+    let n = 0;
+    for (let i = 0; i < 4; i++) {
+      if (allOptions[arr[i]].textContent === questions[questionNumber].answer)
+        continue;
+      else {
+        allOptions[arr[i]].textContent = "";
+        allOptions[arr[i]].style.pointerEvents = "none";
+
+        n++;
+      }
+      if (n === 2) break;
+    } // end for loop
+  }, 4000);
+}); // end onklick
 
 // Two
 two.addEventListener("click", function () {
   two.classList.add("disabled");
   two.style.pointerEvents = "none";
+  skipSound.play();
   if (questionNumber < questions.length - 1) showQuestion(++questionNumber);
   else {
     console.log("End Game");
@@ -168,11 +174,11 @@ two.addEventListener("click", function () {
 
 // Three
 three.addEventListener("click", function () {
+  let allOptions = document.querySelectorAll(".answer-list div");
   three.classList.add("disabled");
   three.style.pointerEvents = "none";
-  let allOptions = document.querySelectorAll(".answer-list div");
-
-  if (questionNumber < questions.length) {
+  optionHelpSound.play();
+  setTimeout(function () {
     allOptions.forEach(function (ans) {
       if (ans.textContent === questions[questionNumber].answer) {
         ans.classList.add("correct");
@@ -187,16 +193,17 @@ three.addEventListener("click", function () {
     progress[prevActive].classList.remove("active");
     progress[nextvActive--].classList.add("active");
     prevActive = nextvActive + 1;
-  }
+  }, 4000);
 });
 
 start_btn.addEventListener("click", function () {
-  startBox.classList.add("hidden");
-  rulesBox.classList.remove("hidden");
+  startBox.classList.remove("active");
+  rulesBox.classList.add("active");
 });
 
 Continue_btn.addEventListener("click", function () {
   // console.log(this); // this start btn => is event as a parameter that mian event.target = this = start btn
+  startAudio.play();
   startGame();
   next_btn.style.display = "none";
   showQuestion(0);
@@ -219,9 +226,9 @@ next_btn.addEventListener("click", function () {
     currentQue++;
     currentQuestion(currentQue);
   } else {
-    startBox.classList.add("hidden");
-    gameBox.classList.add("hidden");
-    resultBox.classList.remove("hidden");
+    startBox.classList.remove("active");
+    gameBox.classList.remove("active");
+    resultBox.classList.add("active");
     prepareResult();
   }
 });
