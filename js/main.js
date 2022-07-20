@@ -6,7 +6,7 @@ let rulesBox = document.querySelector(".game-rules");
 let Continue_btn = document.querySelector(".two-buttons .restart");
 let ExitBtn = document.querySelector(".two-buttons .quit");
 let gameBox = document.querySelector(".game-box");
-let resutlBox = document.querySelector(".result_box");
+let resultBox = document.querySelector(".result-box");
 let next_btn = document.querySelector(".next-btn-section button");
 let question = document.querySelector(".question p");
 
@@ -15,13 +15,15 @@ let one = document.querySelector(".options-help .content .one");
 let two = document.querySelector(".options-help .content .two ");
 let three = document.querySelector(".options-help .content .three ");
 let allOptonsHelp = document.querySelector(".options-help");
-let finalScore = document.querySelector(".text .final-score");
+let finalScore = document.querySelector(".text span.final-score");
 
 let progress = document.querySelectorAll("ul li span");
 // console.log(progress);
 
-let questionNum = document.querySelector(".current-question");
+let currentQueContainer = document.querySelector(".current-question");
 
+let restartBtn = document.querySelector(".result-box .restart");
+let exitBtn = document.querySelector(".result-box .exit");
 // sounds
 let audioNotCorrect = new Audio("./sounds/100-k-1-wrong-answer.mp3");
 let audioCorrect = new Audio("./sounds/Correct-answer.mp3");
@@ -29,7 +31,8 @@ let audioCorrect = new Audio("./sounds/Correct-answer.mp3");
 let questionNumber = 0;
 let nextvActive = 9;
 let prevActive = 9;
-let score = 1;
+let currentQue = 1;
+let score = 0;
 
 function startGame() {
   startBox.classList.add("hidden");
@@ -39,10 +42,11 @@ function startGame() {
 }
 
 function clearAllGame() {
-  resutlBox.classList.add("hidden");
+  resultBox.classList.add("hidden");
   questionNumber = 0;
   nextvActive = 9;
   prevActive = 9;
+  currentQue = 1;
   score = 0;
   progress.forEach(function (li) {
     li.classList.remove("active");
@@ -50,10 +54,9 @@ function clearAllGame() {
   one.classList.remove("disabled");
   two.classList.remove("disabled");
   three.classList.remove("disabled");
-  one.style.pointerEvents = "";
-  two.style.pointerEvents = "";
-  three.style.pointerEvents = "";
-  clearOptions();
+  optionsList.style.pointerEvents = "";
+  next_btn.style.display = "none";
+  allOptonsHelp.style.pointerEvents = "none";
 }
 let m = 0;
 function chickAnswer(option) {
@@ -71,13 +74,13 @@ function chickAnswer(option) {
     progress[prevActive].classList.remove("active");
     progress[nextvActive--].classList.add("active");
     prevActive = nextvActive + 1;
-    // console.log(currentScore);
+    score++;
+    console.log(score);
   } else {
     console.log("Not Correct");
     audioNotCorrect.play();
     option.classList.add("not-correct");
     let allOptions = document.querySelectorAll(".answer-list div");
-
     allOptions.forEach(function (ans) {
       if (ans.textContent === correctAnser) {
         ans.classList.add("correct");
@@ -111,9 +114,25 @@ function showQuestion(index) {
 }
 
 function currentQuestion(current) {
-  questionNum.textContent = score;
+  currentQueContainer.textContent = currentQue;
 }
 
+function prepareResult() {
+  console.log(score);
+  finalScore.textContent = `${score}`;
+  let resultMessage = document.querySelector(".result-box .text .message");
+  console.log(resultMessage);
+  let message;
+  if (score >= 7) {
+    message = `That's Awesome 🥇`;
+  } else if (score >= 5 && score < 7) {
+    message = `This is very good 👏`;
+  } else if (score > 0 && score < 5) {
+    message = `It's okay, try again 💪`;
+    restartBtn.textContent = `Try Again`;
+  }
+  resultMessage.innerHTML = message;
+}
 /// Help Options
 console.log(one);
 one.addEventListener("click", function () {
@@ -159,7 +178,8 @@ three.addEventListener("click", function () {
         ans.classList.add("correct");
       }
     });
-
+    score++;
+    console.log(score);
     allOptions.forEach(function (ans) {
       ans.style.pointerEvents = "none";
     });
@@ -196,28 +216,26 @@ next_btn.addEventListener("click", function () {
     allOptonsHelp.style.pointerEvents = "";
     questionNumber++;
     showQuestion(questionNumber);
-    score++;
-    currentQuestion(score);
+    currentQue++;
+    currentQuestion(currentQue);
   } else {
     startBox.classList.add("hidden");
     gameBox.classList.add("hidden");
-    resutlBox.classList.remove("hidden");
-
-    console.log(finalScore);
-    finalScore.textContent = `${score}`;
+    resultBox.classList.remove("hidden");
+    prepareResult();
   }
 });
 
-// let restartBtn = document.querySelector(".result_box .restart");
-// let exitBtn = document.querySelector(".result_box .exit");
+console.log(restartBtn);
+console.log(exitBtn);
 
-// restartBtn.addEventListener("click", function () {
-//   clearAllGame();
-//   startGame();
-//   next_btn.style.display = "none";
-//   showQuestion(0);
-// });
+restartBtn.addEventListener("click", function () {
+  clearAllGame();
+  startGame();
+  next_btn.style.display = "none";
+  showQuestion(0);
+});
 
-// exitBtn.addEventListener("click", function () {
-//   window.location.reload();
-// });
+exitBtn.addEventListener("click", function () {
+  window.location.reload();
+});

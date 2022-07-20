@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" translate="no">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./images/Logo.png" />
+    <link rel="apple-touch-icon" href="./images/Logo.png" />
     <title>MY Game</title>
-    <link rel="stylesheet" href="./css/last.css">
+    <link rel="stylesheet" href="./css/master.css">
     <link rel="stylesheet" href="./css/queries.css">
 </head>
 
@@ -24,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="start ">
+    <div class="start">
         <button>Start</button>
     </div>
     <!-- End Intro Section  -->
@@ -109,8 +111,19 @@
     </div>
     <!-- End Game  -->
     <!-- Start Result  -->
-    <div class="result-box">
-        
+    <div class="result-box hidden">
+        <div class="image">
+            <img src="./images/well-done.png" alt="">
+        </div>
+        <div class="text">
+            <h3>Congratulations 😊</h4>
+            <p>You got <span class="final-score">$</span> out of <span>10</span></p>
+            <p class="message">anything based on the score </p>
+        </div>
+        <div class="buttons">
+            <button class="restart">Restart</button>
+            <button class="exit">Quit</button>
+        </div>
     </div>
     <!-- End Result  -->
 

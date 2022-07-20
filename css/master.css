@@ -15,7 +15,8 @@ body{
 } 
 .intro-section.hidden,
 .start.hidden,
-.game-box.hidden,.game-rules.hidden
+.game-box.hidden,.game-rules.hidden,
+.result-box.hidden
 {
     opacity: 0;
     z-index: -1;
@@ -27,7 +28,6 @@ body{
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
-
 }
 .intro-section .image{
     top: 15px;
@@ -120,11 +120,8 @@ margin-left: -10px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.two-buttons .restart{
-    background-color: #007bff;
-    color: #ffffff;
-}
-.two-buttons .restart:hover{
+
+button.restart:hover{
     background-color: #0263ca;
 }
 
@@ -323,7 +320,7 @@ height: 280px;
     height: 50px;
     width: 100px;
     outline: none;
-    border: 1px solid var(--main-color);
+    border: 1px solid #0263ca;
     border-radius: 10px;
     color:#007bff ;
     font-size: 20px;
@@ -331,7 +328,71 @@ height: 280px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
- button:hover{
-    color: #fff;
+
+
+/* Start Result */
+.result-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #eee;
+    padding: 30px;
+    box-shadow: 0px 4px 8px 0 rgba(0,0,0,0.2) ,0px 6px 8px 0 rgba(0,0,0,0.19) ;
+    color: #10102e;
+    border-radius: 15px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.result-box .image{
+    text-align: center;
+}
+.result-box img{
+    width: 100px;
+}
+
+
+.result-box .text{
+    text-align: center;
+}
+.result-box .text h3{
+    margin: 10px 0;
+}
+.result-box .text p {
+    font-weight: 500;
+    font-size: 17px;
+}
+.result-box .text p span{
+    font-size: 20px;
+    font-weight: 700;
+}
+.result-box .buttons{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+.result-box .buttons button{
+    margin: 0 5px;
+    height: 40px;
+    width: 90px;
+    outline: none;
+    border: 1px solid #0263ca;
+    border-radius: 10px;
+    color:#007bff ;
+    font-size: 17px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+button.restart{
+    background-color: #007bff;
+    color: #ffffff !important;
+}
+button:hover{
+    color: #fff!important;
     background-color: #0263ca;
 }
+/* End Result */
