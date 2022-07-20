@@ -59,7 +59,7 @@ function clearAllGame() {
   three.classList.remove("disabled");
   optionsList.style.pointerEvents = "";
   next_btn.style.display = "none";
-  allOptonsHelp.style.pointerEvents = "none";
+  allOptonsHelp.style.pointerEvents = "";
 }
 let m = 0;
 function chickAnswer(option) {
@@ -142,7 +142,6 @@ one.addEventListener("click", function () {
   let allOptions = document.querySelectorAll(".answer-list div");
   optionHelpSound.play();
   one.classList.add("disabled");
-  one.style.pointerEvents = "none";
 
   setTimeout(function () {
     let arr = [3, 1, 2, 0];
@@ -164,7 +163,6 @@ one.addEventListener("click", function () {
 // Two
 two.addEventListener("click", function () {
   two.classList.add("disabled");
-  two.style.pointerEvents = "none";
   skipSound.play();
   if (questionNumber < questions.length - 1) showQuestion(++questionNumber);
   else {
@@ -176,7 +174,6 @@ two.addEventListener("click", function () {
 three.addEventListener("click", function () {
   let allOptions = document.querySelectorAll(".answer-list div");
   three.classList.add("disabled");
-  three.style.pointerEvents = "none";
   optionHelpSound.play();
   setTimeout(function () {
     allOptions.forEach(function (ans) {
@@ -186,9 +183,8 @@ three.addEventListener("click", function () {
     });
     score++;
     console.log(score);
-    allOptions.forEach(function (ans) {
-      ans.style.pointerEvents = "none";
-    });
+    optionsList.style.pointerEvents = "none";
+    allOptonsHelp.style.pointerEvents = "none";
     next_btn.style.display = "";
     progress[prevActive].classList.remove("active");
     progress[nextvActive--].classList.add("active");
@@ -210,14 +206,14 @@ Continue_btn.addEventListener("click", function () {
 });
 
 ExitBtn.addEventListener("click", function () {
-  rulesBox.classList.add("hidden");
-  startBox.classList.remove("hidden");
+  rulesBox.classList.remove("active");
+  startBox.classList.add("active");
 });
 
 next_btn.addEventListener("click", function () {
   audioCorrect.pause();
   audioNotCorrect.pause();
-  if (questionNumber < questions.length - 1) {
+  if (questionNumber < 4) {
     next_btn.style.display = "none";
     optionsList.style.pointerEvents = "";
     allOptonsHelp.style.pointerEvents = "";
@@ -227,6 +223,8 @@ next_btn.addEventListener("click", function () {
     currentQuestion(currentQue);
   } else {
     startBox.classList.remove("active");
+
+    gameBox.style.transition = "all 0.4s ease";
     gameBox.classList.remove("active");
     resultBox.classList.add("active");
     prepareResult();
@@ -237,9 +235,11 @@ console.log(restartBtn);
 console.log(exitBtn);
 
 restartBtn.addEventListener("click", function () {
+  gameBox.style.transition = "all 9s ease";
   clearAllGame();
   startGame();
   next_btn.style.display = "none";
+  startAudio.play();
   showQuestion(0);
 });
 
