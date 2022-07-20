@@ -213,7 +213,7 @@ ExitBtn.addEventListener("click", function () {
 next_btn.addEventListener("click", function () {
   audioCorrect.pause();
   audioNotCorrect.pause();
-  if (questionNumber < 4) {
+  if (questionNumber < questions.length - 1) {
     next_btn.style.display = "none";
     optionsList.style.pointerEvents = "";
     allOptonsHelp.style.pointerEvents = "";
