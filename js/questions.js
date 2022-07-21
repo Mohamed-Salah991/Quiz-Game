@@ -76,10 +76,59 @@ let questions = [
     answer: "bool",
     options: ["double", "float", "int", "bool"],
   },
+
   {
     num: 10,
     question: "By default, all the files in C++ are opened in _________ mode.",
     answer: "Text",
     options: ["Binary", "VTC", "Text", "ISCII"],
   },
+  {
+    num: 11,
+    question: "Which element is used for or styling HTML5 layout?",
+    answer: "CSS",
+    options: ["JavaScript", "jQuery", "PHP", "CSS"],
+  },
+  {
+    num: 12,
+    question:
+      "In HTML, which attribute is used to create a link that opens in a new window tab?",
+    answer: "target=”_blank”",
+    options: [
+      "target=”_blank”",
+      "src=”_blank”",
+      "alt=”_blank”",
+      "target=”_self”",
+    ],
+  },
+  // {
+  //   num: 13,
+  //   question: "By default, all the files in C++ are opened in _________ mode.",
+  //   answer: "Text",
+  //   options: ["Binary", "VTC", "Text", "ISCII"],
+  // },
+  // {
+  //   num: 14,
+  //   question: "By default, all the files in C++ are opened in _________ mode.",
+  //   answer: "Text",
+  //   options: ["Binary", "VTC", "Text", "ISCII"],
+  // },
+  // {
+  //   num: 15,
+  //   question: "By default, all the files in C++ are opened in _________ mode.",
+  //   answer: "Text",
+  //   options: ["Binary", "VTC", "Text", "ISCII"],
+  // },
+  // {
+  //   num: 16,
+  //   question: "By default, all the files in C++ are opened in _________ mode.",
+  //   answer: "Text",
+  //   options: ["Binary", "VTC", "Text", "ISCII"],
+  // },
+  // {
+  //   num: 17,
+  //   question: "By default, all the files in C++ are opened in _________ mode.",
+  //   answer: "Text",
+  //   options: ["Binary", "VTC", "Text", "ISCII"],
+  // },
 ];

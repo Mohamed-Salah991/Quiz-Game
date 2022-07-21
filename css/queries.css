@@ -1,4 +1,5 @@
-@media (max-width:767px) {
+@media (max-width:767px) { 
+    /* Smalle Screen, Phones  */
     .game-box{
         display: flex;
         flex-direction: column;
@@ -10,7 +11,11 @@
         justify-content: center;
         align-items: center;
     }
+    .answer-section{
+        min-height: 35%;
+    }
 }
+
 @media(min-width : 768px){
     .game-rules{
         width: 750px;
@@ -38,7 +43,10 @@
             margin-top: 20px;
         }
     }
-    
+
+
+
+
     @media (min-width:992px) {
         .game-box{
             display: grid;

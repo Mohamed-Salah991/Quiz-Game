@@ -37,6 +37,16 @@ let prevActive = 9;
 let currentQue = 1;
 let score = 0;
 
+let randomQuestions = [];
+
+function createRandomQuestions(num = 10) {
+  while (randomQuestions.length < num) {
+    // lenght = 12  => form 0 to 11
+    let r = Math.floor(Math.random() * num);
+    if (randomQuestions.indexOf(r) === -1) randomQuestions.push(r);
+  }
+}
+
 function startGame() {
   startBox.classList.remove("active");
   gameBox.classList.add("active");
@@ -65,7 +75,7 @@ let m = 0;
 function chickAnswer(option) {
   let userAnswer = option.textContent;
   console.log(userAnswer);
-  let correctAnser = questions[questionNumber].answer;
+  let correctAnser = questions[randomQuestions[questionNumber]].answer;
   console.log(correctAnser);
   // console.log(option.textContent, m++);
   audioNotCorrect = new Audio("./sounds/100-k-1-wrong-answer.mp3");
@@ -147,7 +157,10 @@ one.addEventListener("click", function () {
     let arr = [3, 1, 2, 0];
     let n = 0;
     for (let i = 0; i < 4; i++) {
-      if (allOptions[arr[i]].textContent === questions[questionNumber].answer)
+      if (
+        allOptions[arr[i]].textContent ===
+        questions[randomQuestions[questionNumber]].answer
+      )
         continue;
       else {
         allOptions[arr[i]].textContent = "";
@@ -162,12 +175,13 @@ one.addEventListener("click", function () {
 
 // Two
 two.addEventListener("click", function () {
+  createRandomQuestions(11);
   two.classList.add("disabled");
   skipSound.play();
-  if (questionNumber < questions.length - 1) showQuestion(++questionNumber);
-  else {
-    console.log("End Game");
-  }
+  setTimeout(function () {
+    console.log(randomQuestions);
+    showQuestion(randomQuestions[++questionNumber]);
+  }, 1000);
 });
 
 // Three
@@ -177,7 +191,9 @@ three.addEventListener("click", function () {
   optionHelpSound.play();
   setTimeout(function () {
     allOptions.forEach(function (ans) {
-      if (ans.textContent === questions[questionNumber].answer) {
+      if (
+        ans.textContent === questions[randomQuestions[questionNumber]].answer
+      ) {
         ans.classList.add("correct");
       }
     });
@@ -202,7 +218,9 @@ Continue_btn.addEventListener("click", function () {
   startAudio.play();
   startGame();
   next_btn.style.display = "none";
-  showQuestion(0);
+  createRandomQuestions();
+  console.log(randomQuestions);
+  showQuestion(randomQuestions[0]);
 });
 
 ExitBtn.addEventListener("click", function () {
@@ -213,12 +231,12 @@ ExitBtn.addEventListener("click", function () {
 next_btn.addEventListener("click", function () {
   audioCorrect.pause();
   audioNotCorrect.pause();
-  if (questionNumber < questions.length - 1) {
+  if (questionNumber < randomQuestions.length - 1) {
     next_btn.style.display = "none";
     optionsList.style.pointerEvents = "";
     allOptonsHelp.style.pointerEvents = "";
     questionNumber++;
-    showQuestion(questionNumber);
+    showQuestion(randomQuestions[questionNumber]);
     currentQue++;
     currentQuestion(currentQue);
   } else {
@@ -240,7 +258,10 @@ restartBtn.addEventListener("click", function () {
   startGame();
   next_btn.style.display = "none";
   startAudio.play();
-  showQuestion(0);
+  randomQuestions = [];
+  createRandomQuestions();
+  console.log(randomQuestions);
+  showQuestion(randomQuestions[0]);
 });
 
 exitBtn.addEventListener("click", function () {
